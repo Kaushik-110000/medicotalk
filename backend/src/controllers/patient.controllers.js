@@ -113,7 +113,7 @@ const logOutPatient = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: false,
+    sameSite: "None",
   };
 
   return res
