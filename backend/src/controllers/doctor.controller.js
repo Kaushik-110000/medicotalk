@@ -108,7 +108,7 @@ const dignoser = asyncHandler(async (req, res) => {
   ---
   
  **Your task:** 
-  - First, identify which of the three cases above applies.
+  - First, identify which of the three cases above applies. never reply the case , its just for your reference
   - Then, generate a **concise, professional, and medically sound response**.
   - If necessary, suggest **further tests or specialist consultation**.
   

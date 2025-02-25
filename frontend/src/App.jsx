@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useEffect, useState } from "react";
+import Container from "./container/Container";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import authService from "./Backend/patient.config.js";
+import { useDispatch } from "react-redux";
+import {
+  login as storeLogin,
+  logOut as storeLogout,
+} from "./store/authSlice.js";
+import { useNavigate } from "react-router-dom";
 function App() {
-  const [count, setCount] = useState(0)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    authService
+      .getCurrentPatient()
+      .then((res) => {
+        if (res?.data?.data?._id) {
+          dispatch(storeLogin({ userData: res.data.data }));
+        } else {
+          dispatch(storeLogout());
+        }
+      })
+      .catch(() => {
+        dispatch(storeLogout());
+      });
+  });
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Container>
+      <Header />
+      <div className="h-[100vh] bg-blue-300 mt-2">
+        <Outlet />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Container>
+  );
 }
 
-export default App
+export default App;
