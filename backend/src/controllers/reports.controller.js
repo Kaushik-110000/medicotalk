@@ -28,7 +28,7 @@ const diagnoseTumour = asyncHandler(async (req, res) => {
   formData.append("file", fs.createReadStream(reportLocalPath));
 
   const diagnoseResponse = await axios.post(
-    "https://kaushik8873-medino.hf.space/predicttumor/tumor_model",
+    `${process.env.ML_URL}/predicttumor/tumor_model`,
     formData,
     { headers: formData.getHeaders() }
   );
@@ -69,7 +69,7 @@ const diagnoseCovid = asyncHandler(async (req, res) => {
   formData.append("file", fs.createReadStream(reportLocalPath));
 
   const diagnoseResponse = await axios.post(
-    "https://kaushik8873-medino.hf.space/predictcovid/covid_model",
+    `${process.env.ML_URL}/predictcovid/covid_model`,
     formData,
     { headers: formData.getHeaders() }
   );
@@ -110,7 +110,7 @@ const diagnosePneumonia = asyncHandler(async (req, res) => {
   formData.append("file", fs.createReadStream(reportLocalPath));
 
   const diagnoseResponse = await axios.post(
-    "https://kaushik8873-medino.hf.space/predictpneumonia/pneumonia_model",
+    `${process.env.ML_URL}/predictpneumonia/pneumonia_model`,
     formData,
     { headers: formData.getHeaders() }
   );
@@ -151,7 +151,7 @@ const analyzeBloodReport = asyncHandler(async (req, res) => {
   formData.append("file", fs.createReadStream(reportLocalPath));
 
   const analyzeResponse = await axios.post(
-    "https://kaushik8873-medino.hf.space/bloodreport/read",
+    `${process.env.ML_URL}/bloodreport/read`,
     formData,
     { headers: formData.getHeaders() }
   );
@@ -192,7 +192,7 @@ const readPrescription = asyncHandler(async (req, res) => {
   formData.append("file", fs.createReadStream(prescriptionLocalPath));
 
   const prescriptionResponse = await axios.post(
-    "https://kaushik8873-medino.hf.space/doctorprescription/read",
+    `${process.env.ML_URL}/doctorprescription/read`,
     formData,
     { headers: formData.getHeaders() }
   );

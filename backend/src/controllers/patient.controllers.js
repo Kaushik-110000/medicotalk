@@ -91,4 +91,34 @@ const getPatient = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, result, "Patient details fetched"));
 });
-export { registerPatient, loginPatient, getPatient };
+
+const logOutPatient = asyncHandler(async (req, res) => {
+  const patientId = req.patient._id;
+  if (!patientId) {
+    throw new ApiError(404, "You are not inside patient id ");
+  }
+  await Patient.findByIdAndUpdate(
+    new mongoose.Types.ObjectId(patientId),
+    {
+      $unset: {
+        token: 1,
+        tokenValidity: 1,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+    sameSite: false,
+  };
+
+  return res
+    .status(200)
+    .clearCookie("token", options)
+    .json(new ApiResponse(200, {}, "Logged out user"));
+});
+export { registerPatient, loginPatient, getPatient, logOutPatient };
