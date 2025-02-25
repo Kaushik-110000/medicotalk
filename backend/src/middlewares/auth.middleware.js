@@ -1,32 +1,30 @@
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model.js";
+import { Patient } from "../models/patient.model.js";
 
-//used _ instead of res as it was not used anywhere
-export const verifyJWT = asyncHandler(async (req, _ , next) => {
-  // console.log("Entering in verify JWT function");
+export const verifyJWT = asyncHandler(async (req, _, next) => {
   try {
     const token =
-      req.cookies?.accessToken ||
-      req.header("Authorization")?.replace("Bearer", "").trim();
+      req.cookies?.token ||
+      req.header("Authorization")?.replace("Bearer ", "").trim(); // Fixed "Bearer" replacement
+    console.log(token);
+    if (!token) throw new ApiError(403, "Unauthorized request");
 
-    // console.log("Yout token ", token);
+    // Verify token
+    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    console.log("dd", decodedToken);
+    // Ensure token contains an ID
+    if (!decodedToken?._id) throw new ApiError(401, "Invalid access token");
 
-    if (!token) throw new ApiError(403, "Unauthorised request");
+    // Fetch patient details
+    const patient = await Patient.findById(decodedToken._id);
 
-    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    if (!patient) throw new ApiError(401, "Patient not found");
 
-    const user = await User.findById(decodedToken?._id).select(
-      "-password -refreshToken"
-    );
+    // Attach patient to request object
+    req.patient = decodedToken;
 
-    if (!user) {
-      throw new ApiError(401, "Invalid access token");
-    }
-
-    req.user = user;
-    
     next();
   } catch (error) {
     throw new ApiError(401, error?.message || "Invalid token");
