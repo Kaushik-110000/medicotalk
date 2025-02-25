@@ -15,7 +15,7 @@ router = APIRouter()
 # Load tumor model at startup
 models = {}
 try:
-    models["tumor_model"] = keras.models.load_model("models/tumor_detectionmodel.keras")
+    models["tumor_model"] = keras.models.load_model("models/tumor_detectionmodel.keras",compile=False)
     print("✅ Tumor model loaded successfully!")
 except Exception as e:
     print(f"❌ Error loading tumor model: {e}")

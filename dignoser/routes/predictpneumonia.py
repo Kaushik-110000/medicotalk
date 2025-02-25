@@ -13,7 +13,7 @@ router = APIRouter()
 # ✅ Load Pneumonia Detection Model at Startup
 models = {}
 try:
-    models["pneumonia_model"] = keras.models.load_model("models/pneumonia_detectormodel.keras")
+    models["pneumonia_model"] = keras.models.load_model("models/pneumonia_detectormodel.keras",compile=False)
     print("✅ Pneumonia Model loaded successfully!")
 except Exception as e:
     print(f"❌ Error loading model: {e}")

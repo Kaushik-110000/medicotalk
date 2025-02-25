@@ -13,3 +13,6 @@ COPY . .
 
 # Run FastAPI on Hugging Face Spaces
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
+
+
+#python -m uvicorn app:app --host 0.0.0.0 --port 7860

@@ -4,11 +4,40 @@ import cv2
 import numpy as np
 import io
 from PIL import Image
-
+from pathlib import Path 
 router = APIRouter()
+import os
 
-# ✅ Initialize EasyOCR reader (English)
-reader = easyocr.Reader(['en'])
+# 1. Determine the directory of this file (bloodreportreader.py)
+CUSTOM_OCR_DIR = "/tmp/.EasyOCR"
+USER_NETWORK_DIR = os.path.join(CUSTOM_OCR_DIR, "user_network")
+
+# Ensure both directories exist
+Path(CUSTOM_OCR_DIR).mkdir(parents=True, exist_ok=True)
+Path(USER_NETWORK_DIR).mkdir(parents=True, exist_ok=True)
+
+# Initialize EasyOCR
+reader = easyocr.Reader(
+    ['en'],
+    gpu=False,  # CPU only
+    model_storage_directory=CUSTOM_OCR_DIR,
+    user_network_directory=USER_NETWORK_DIR
+)
+
+# 4. Ensure both directories exist
+Path(CUSTOM_OCR_DIR).mkdir(parents=True, exist_ok=True)
+Path(USER_NETWORK_DIR).mkdir(parents=True, exist_ok=True)
+
+# 5. Initialize EasyOCR with custom directories
+reader = easyocr.Reader(
+    ['en'],
+    gpu=False,  # if you want CPU only
+    model_storage_directory=CUSTOM_OCR_DIR,
+    user_network_directory=USER_NETWORK_DIR
+)
+
+print("EasyOCR model directory:", CUSTOM_OCR_DIR)
+print("EasyOCR user network directory:", USER_NETWORK_DIR)
 
 def preprocess_image(image: Image.Image) -> np.ndarray:
     """

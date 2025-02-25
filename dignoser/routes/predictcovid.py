@@ -13,7 +13,7 @@ router = APIRouter()
 # Load all models at startup
 models = {}
 try:
-    models["covid_model"] = keras.models.load_model("models/covid_model.keras")
+    models["covid_model"] = keras.models.load_model("models/covid_model.keras",compile=False)
     print("✅ Model loaded successfully!")
 except Exception as e:
     print(f"❌ Error loading model: {e}")

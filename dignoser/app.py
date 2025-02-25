@@ -1,3 +1,6 @@
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1" 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.predictcovid import router as predictcovid_router
@@ -6,6 +9,9 @@ from routes.predictpneumonia import router as predictpneumonia_router
 from routes.bloodreportreader import router as bloodreport_router
 from routes.readDoctor import router as readDoctor_router
 # Initialize FastAPI app
+
+
+
 app = FastAPI(
     title="Multi-Model API",
     description="API for multiple ML models"
