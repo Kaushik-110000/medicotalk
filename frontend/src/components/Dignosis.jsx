@@ -25,7 +25,7 @@ const diagnosisOptions = [
   {
     id: "blood",
     title: "Blood Report",
-    image: "/report.jpg",
+    image: "/reports.jpg",
     desc: "Complete blood count (CBC) analysis",
   },
   {

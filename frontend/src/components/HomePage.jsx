@@ -9,7 +9,7 @@ function HomePage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-300 pl-6 pr-6">
       {/* Logo Section */}
       <h1 className="text-xl text-black">Current Patient = {userData.patientID}</h1>
-      <img src="/public/logo.svg" alt="MedicoTalk Logo" className="w-50 h-50" />
+      <img src="/logo.svg" alt="MedicoTalk Logo" className="w-50 h-50" />
 
       <h1 className="text-4xl font-bold text-white mb-8">Presents</h1>
 
@@ -17,7 +17,7 @@ function HomePage() {
         {/* Diagnosis Section */}
         <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center text-center">
           <img
-            src="/public/checklist-9030329_1280.png"
+            src="/checklist-9030329_1280.png"
             alt="Diagnosis"
             className="w-60 h-60 mb-4 rounded-md"
           />
@@ -36,7 +36,7 @@ function HomePage() {
         {/* Chatbot Section */}
         <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center text-center">
           <img
-            src="/public/fingers-5946228_1280.jpg"
+            src="/fingers-5946228_1280.jpg"
             alt="Chatbot"
             className="w-60 h-60 mb-4 rounded-md"
           />
