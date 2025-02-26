@@ -34,7 +34,7 @@ configure .env as per the env samples.
 
 For dignosis backend,
 also here is your ML URL , if you face difficulty you may use the url : https://kaushik8873-medino.hf.space
-
+---
 ### *3️⃣ Start the Development Server*
 bash
 npm run dev
