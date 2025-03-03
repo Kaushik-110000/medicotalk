@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 
 function HomePage() {
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
+  //const userData = useSelector((state) => state.auth.userData);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-300 pl-6 pr-6">
       {/* Logo Section */}
-      <h1 className="text-xl text-black">Current Patient = {userData.patientID}</h1>
+      {/*<h1 className="text-xl text-black">Current Patient = {userData.patientID}</h1>*/}
       <img src="/logo.svg" alt="MedicoTalk Logo" className="w-50 h-50" />
 
       <h1 className="text-4xl font-bold text-white mb-8">Presents</h1>
