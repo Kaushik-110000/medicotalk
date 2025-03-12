@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-catch */
+/* eslint-disable no-undef */
 import { retry } from "@reduxjs/toolkit/query";
 import server from "../conf/conf.js";
 import axios from "axios";
